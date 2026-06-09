@@ -83,10 +83,14 @@ Este enfoque permite:
 .
 ├── app.py
 ├── anonimizador.py
-├── ejemplo.txt
-├── enunciado_anonimizador.md
-├── requirements.txt
-└── README.md
+├── README.md
+├── .gitignore
+│
+└── docs/
+    ├── ejemplo.txt
+    ├── enunciado_anonimizador.md
+    ├── requirements.txt
+    └── texto_anonimizado.txt
 ```
 
 ## Instalación

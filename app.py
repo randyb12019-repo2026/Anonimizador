@@ -46,6 +46,6 @@ if st.button("Anonimizar"):
         st.download_button(
             label="Descargar texto anonimizado",
             data=texto_anonimo,
-            file_name="texto_anonimizado.txt",
+            file_name="docs/texto_anonimizado.txt",
             mime="text/plain"
         )
