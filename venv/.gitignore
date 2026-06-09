@@ -1,0 +1,54 @@
+### Leeme del Gitignore
+###Este archivo `.gitignore` está diseñado para excluir archivos y directorios específicos del entorno virtual de Python, así como otros archivos relacionados con el desarrollo que no deberían ser rastreados por Git. A continuación se explica cada sección del archivo:
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de compilación
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Variables de entorno
+.env
+.env.*
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Archivos si los hubiera para pruebas locales
+salida.txt
+resultado.txt
+
+# Datos sensibles de ejemplo (si los hubiera)
+data/*
+!data/.gitkeep
+
+# Credenciales si las hubiera
+credenciales.py
+
+# Cache
+.cache/
