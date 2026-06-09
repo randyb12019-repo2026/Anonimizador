@@ -1,54 +1,74 @@
-### Leeme del Gitignore
-###Este archivo `.gitignore` está diseñado para excluir archivos y directorios específicos del entorno virtual de Python, así como otros archivos relacionados con el desarrollo que no deberían ser rastreados por Git. A continuación se explica cada sección del archivo:
-# Entornos virtuales
-.venv/
-venv/
-env/
-
-# Python
+```gitignore
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Archivos de compilación
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Distribución / empaquetado
 build/
 dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
+.installed.cfg
+*.egg
 
-# Jupyter
+# Instaladores
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Cobertura y testing
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# Jupyter Notebook
 .ipynb_checkpoints/
 
-# Variables de entorno
+# Archivos de entorno
 .env
 .env.*
 
-# Streamlit
-.streamlit/secrets.toml
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
 
 # Logs
 *.log
-
-# Archivos temporales
-*.tmp
-*.temp
 
 # Sistema operativo
 .DS_Store
 Thumbs.db
 
-# VS Code
-.vscode/
+# MyPy
+.mypy_cache/
 
-# Archivos si los hubiera para pruebas locales
-salida.txt
-resultado.txt
+# Ruff
+.ruff_cache/
 
-# Datos sensibles de ejemplo (si los hubiera)
-data/*
-!data/.gitkeep
+# Pyre
+.pyre/
 
-# Credenciales si las hubiera
-credenciales.py
-
-# Cache
-.cache/
+# Archivos temporales
+*.tmp
+*.temp
+```
