@@ -1,53 +1,147 @@
-# 🔒 Proyecto: Anonimizador de datos personales (PII)
+# 🔒 Anonimizador Local de Datos Personales (PII)
 
-## El caso
-Una empresa quiere pasar textos (emails de clientes, tickets, historiales) por una
-herramienta de IA en la nube, pero **mandar datos personales a un servidor externo
-viola el RGPD**. La solución: un anonimizador que corre **100% en local** y tacha los
-datos personales ANTES de que el texto salga de la máquina.
+## Descripción
 
-Aquí es donde brilla un modelo pequeño local: **gratis, rápido y privado**.
+Este proyecto implementa una solución de anonimización de datos personales utilizando Inteligencia Artificial ejecutada completamente en local mediante Ollama y el modelo Qwen3:4B.
 
-## Qué vas a construir
-Una pequeña web local (Streamlit) donde pegas un texto y te devuelve:
-- el texto con los datos personales tachados (`[NOMBRE]`, `[EMAIL]`, `[TELEFONO]`…)
-- una tabla con todo lo que se ha detectado
-- un botón para descargar el resultado
+Su objetivo es identificar y proteger información sensible contenida en textos como correos electrónicos, tickets de soporte, formularios o documentación interna antes de que estos sean procesados por sistemas externos.
 
-Todo hablando con **Ollama en local** (`qwen3:4b`). Sin API de pago.
+La aplicación detecta automáticamente datos personales y los sustituye por etiquetas estandarizadas, permitiendo preservar la privacidad de la información y reducir riesgos asociados al tratamiento de datos sensibles.
 
-## La idea clave (no te la saltes)
-**No** le pidas al modelo que reescriba el texto. Hazlo en dos pasos:
-1. **El modelo DETECTA** → devuelve una *lista estructurada* de datos personales
-   (tipo + fragmento exacto). Usa `format=` con un modelo Pydantic.
-2. **Tu código TACHA** → sustituye cada fragmento por su etiqueta.
+## Problema que resuelve
 
-¿Por qué así? Porque **garantizas** que el dato desaparece (no dependes de que el
-modelo no se deje ninguno al reescribir) y puedes **auditar** qué se quitó.
+Cada vez más organizaciones utilizan herramientas de Inteligencia Artificial para analizar y procesar información textual. Sin embargo, muchos de esos documentos contienen datos personales cuya exposición puede suponer riesgos de privacidad o incumplimientos normativos.
 
-## Pasos sugeridos
-1. Define con Pydantic la salida: una lista de entidades `{tipo, texto}`, donde `tipo`
-   es un `Literal[...]` con las categorías (NOMBRE, EMAIL, TELEFONO, DNI, DIRECCION,
-   IBAN, TARJETA). El `Literal` evita que el modelo se invente categorías.
-2. `detectar(texto)` → llama a Ollama con `format=schema` + un *system prompt* que
-   explique la tarea. Devuelve el objeto validado.
-3. `anonimizar(texto, deteccion)` → en Python, reemplaza cada `texto` por `[TIPO]`.
-4. Móntalo en una web con Streamlit: `text_area` + botón + resultado + tabla.
+Este proyecto aborda ese problema mediante una capa de anonimización previa que permite eliminar información sensible antes de utilizar servicios de IA o compartir documentos con terceros.
 
-> Consejo: separa la **lógica** (un archivo) de la **web** (otro). Más limpio y te deja
-> probar la lógica sin levantar la web.
+## Características principales
 
-## Datos de prueba
-Tienes `ejemplo.txt` con varios datos personales mezclados (nombre, email, teléfono,
-dirección, DNI, IBAN). Empieza por ahí.
+* Ejecución 100% local mediante Ollama.
+* Sin dependencias de APIs externas de pago.
+* Detección automática de información personal.
+* Sustitución de datos sensibles por etiquetas normalizadas.
+* Interfaz web desarrollada con Streamlit.
+* Visualización de entidades detectadas.
+* Descarga del texto anonimizado.
+* Salidas estructuradas validadas mediante Pydantic.
 
-## Antes de empezar
+## Datos detectados
+
+Actualmente la aplicación es capaz de identificar:
+
+* Nombres y apellidos
+* Correos electrónicos
+* Números de teléfono
+* DNI
+* Direcciones
+* IBAN
+* Tarjetas bancarias
+
+Los datos detectados son reemplazados por etiquetas como:
+
+```text
+[NOMBRE]
+[EMAIL]
+[TELEFONO]
+[DNI]
+[DIRECCION]
+[IBAN]
+[TARJETA]
+```
+
+## Arquitectura de la solución
+
+La aplicación sigue un enfoque de dos etapas:
+
+### 1. Detección
+
+El modelo de lenguaje identifica entidades sensibles presentes en el texto y devuelve una respuesta estructurada.
+
+### 2. Anonimización
+
+La lógica desarrollada en Python sustituye cada entidad detectada por una etiqueta correspondiente.
+
+Este enfoque permite:
+
+* Mayor control sobre el proceso.
+* Resultados reproducibles.
+* Facilidad de auditoría.
+* Menor riesgo de que información sensible permanezca en el texto final.
+
+## Tecnologías utilizadas
+
+* Python
+* Streamlit
+* Ollama
+* Qwen3:4B
+* Pydantic
+* Pandas
+
+## Estructura del proyecto
+
+```text
+.
+├── app.py
+├── anonimizador.py
+├── ejemplo.txt
+├── requirements.txt
+└── README.md
+```
+
+## Instalación
+
+### 1. Clonar el repositorio
+
+```bash
+git clone <url-del-repositorio>
+cd <nombre-del-repositorio>
+```
+
+### 2. Instalar dependencias
+
 ```bash
 pip install -r requirements.txt
 ```
-Arrancar la web:  `streamlit run app.py`
 
-## Está "hecho" cuando…
-- Pegas el ejemplo y los datos personales salen tachados.
-- La tabla muestra qué se detectó y de qué tipo.
-- Puedes descargar el texto limpio.
+### 3. Descargar el modelo
+
+```bash
+ollama pull qwen3:4b
+```
+
+### 4. Ejecutar la aplicación
+
+```bash
+streamlit run app.py
+```
+
+## Ejemplo de funcionamiento
+
+### Texto original
+
+```text
+Mi nombre es Juan Pérez.
+Mi correo es juan.perez@gmail.com.
+Mi teléfono es 612345678.
+```
+
+### Texto anonimizado
+
+```text
+Mi nombre es [NOMBRE].
+Mi correo es [EMAIL].
+Mi teléfono es [TELEFONO].
+```
+
+## Posibles mejoras futuras
+
+* Soporte para documentos PDF y Word.
+* Procesamiento masivo de archivos.
+* Exportación de informes de anonimización.
+* Detección multilingüe.
+* Incorporación de métricas de confianza.
+* Integración con flujos empresariales de tratamiento documental.
+
+## Autor
+
+Proyecto desarrollado como parte de un portfolio de proyectos de Inteligencia Artificial y Procesamiento de Lenguaje Natural (NLP), enfocado en privacidad, protección de datos y uso de modelos de lenguaje ejecutados localmente.
