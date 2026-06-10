@@ -1,0 +1,11 @@
+Asunto: Reclamación pedido #4471
+
+Hola, buenas tardes. Soy [NOMBRE] y escribo porque mi pedido no ha llegado.
+Pueden contactarme en el correo [EMAIL] o en el teléfono [TELEFONO].
+Mi dirección de entrega es [DIRECCION].
+Adjunto mi DNI [DNI] por si necesitan verificar mi identidad.
+
+Para el reembolso, mi número de cuenta es [IBAN].
+La incidencia la gestionó vuestra agente [NOMBRE] la semana pasada.
+
+Un saludo.
