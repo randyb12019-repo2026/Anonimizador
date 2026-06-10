@@ -84,6 +84,7 @@ Este enfoque permite:
 ├── app.py
 ├── anonimizador.py
 ├── ejemplo.txt
+├── enunciado_anonimizador.md
 ├── requirements.txt
 └── README.md
 ```
