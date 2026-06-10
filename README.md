@@ -150,3 +150,8 @@ Mi teléfono es [TELEFONO].
 ## Autor
 
 Proyecto desarrollado como parte de un portfolio de proyectos de Inteligencia Artificial y Procesamiento de Lenguaje Natural (NLP), enfocado en privacidad, protección de datos y uso de modelos de lenguaje ejecutados localmente.
+
+## Licencia
+
+MIT — ver [LICENSE](./LICENSE).
+
