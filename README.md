@@ -120,6 +120,10 @@ ollama pull qwen3:4b
 streamlit run app.py
 ```
 
+## Demo
+
+![Demo de la aplicación](docs/demo.gif)
+
 ## Ejemplo de funcionamiento
 
 ### Texto original
